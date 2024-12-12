@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package com.fuyuaki.as_tales_foretold.api;
 
 import java.util.List;
 import java.util.Set;
@@ -14,7 +14,7 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 
 // An example config class. This is not required, but it's a good idea to have one to keep your config organized.
 // Demonstrates how to use Neo's config APIs
-@EventBusSubscriber(modid = ExampleMod.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = AsTalesForetoldMod.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class Config
 {
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
@@ -23,9 +23,9 @@ public class Config
             .comment("Whether to log the dirt block on common setup")
             .define("logDirtBlock", true);
 
-    private static final ModConfigSpec.IntValue MAGIC_NUMBER = BUILDER
-            .comment("A magic number")
-            .defineInRange("magicNumber", 42, 0, Integer.MAX_VALUE);
+    private static final ModConfigSpec.IntValue PICK_UP_MOB_DROPS = BUILDER
+            .comment("How often should Herobrine pick up mob drops? (One in X)")
+            .defineInRange("pickUpMobDrops", 20, 0, Integer.MAX_VALUE);
 
     public static final ModConfigSpec.ConfigValue<String> MAGIC_NUMBER_INTRODUCTION = BUILDER
             .comment("What you want the introduction message to be for the magic number")
@@ -39,7 +39,7 @@ public class Config
     static final ModConfigSpec SPEC = BUILDER.build();
 
     public static boolean logDirtBlock;
-    public static int magicNumber;
+    public static int pickUpMobDrops;
     public static String magicNumberIntroduction;
     public static Set<Item> items;
 
@@ -52,7 +52,7 @@ public class Config
     static void onLoad(final ModConfigEvent event)
     {
         logDirtBlock = LOG_DIRT_BLOCK.get();
-        magicNumber = MAGIC_NUMBER.get();
+        pickUpMobDrops = PICK_UP_MOB_DROPS.get();
         magicNumberIntroduction = MAGIC_NUMBER_INTRODUCTION.get();
 
         // convert the list of strings into a set of items
