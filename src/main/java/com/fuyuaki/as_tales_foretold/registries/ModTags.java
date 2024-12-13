@@ -45,7 +45,7 @@ public class ModTags {
     }
 
     public static class Entities {
-        public static final TagKey<EntityType<?>> CANNOT_PICKUP = tag("bosses");
+        public static final TagKey<EntityType<?>> CANNOT_PICKUP = tag("cannot_pickup");
 
         private static TagKey<EntityType<?>> tag(String name) {
             return TagKey.create(Registries.ENTITY_TYPE, ResourceLocation.fromNamespaceAndPath(MODID, name));

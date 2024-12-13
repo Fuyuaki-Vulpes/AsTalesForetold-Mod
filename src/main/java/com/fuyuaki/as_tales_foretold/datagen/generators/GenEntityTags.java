@@ -23,6 +23,7 @@ public class GenEntityTags extends EntityTypeTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        this.tag(ModTags.Entities.CANNOT_PICKUP).addTag(Tags.EntityTypes.BOSSES);
+        this.tag(ModTags.Entities.CANNOT_PICKUP).addTag(Tags.EntityTypes.BOSSES)
+                ;
     }
 }

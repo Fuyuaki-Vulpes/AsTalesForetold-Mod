@@ -28,41 +28,15 @@ import java.util.Random;
 @Mod(AsTalesForetoldMod.MODID)
 public class AsTalesForetoldMod
 {
-    // Define mod id in a common place for everything to reference
+
     public static final String MODID = "as_tales_foretold";
-    public static final Random RANDOM = new Random();
 
     private static final Logger LOGGER = LogUtils.getLogger();
 
-    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(MODID);
-
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.createItems(MODID);
-
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MODID);
-
-
-    // Creates a creative tab with the id "examplemod:example_tab" for the example item, that is placed after the combat tab
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> EXAMPLE_TAB = CREATIVE_MODE_TABS.register("as_tales_foretold", () -> CreativeModeTab.builder()
-            .title(Component.translatable("itemGroup.as_tales_foretold")) //The language key for the title of your CreativeModeTab
-            .withTabsBefore(CreativeModeTabs.COMBAT)
-            .icon(() -> Items.PLAYER_HEAD.getDefaultInstance())
-            .displayItems((parameters, output) -> {
-                output.accept(Items.PLAYER_HEAD); // Add the example item to the tab. For your own tabs, this method is preferred over the event
-            }).build());
-
-    // The constructor for the mod class is the first code that is run when your mod is loaded.
-    // FML will recognize some parameter types like IEventBus or ModContainer and pass them in automatically.
     public AsTalesForetoldMod(IEventBus modEventBus, ModContainer modContainer)
     {
 
         modEventBus.addListener(this::commonSetup);
-
-
-        BLOCKS.register(modEventBus);
-
-        ITEMS.register(modEventBus);
-
-        CREATIVE_MODE_TABS.register(modEventBus);
 
 
 
@@ -77,11 +51,8 @@ public class AsTalesForetoldMod
     private void commonSetup(final FMLCommonSetupEvent event)
     {
         // Some common setup code
-        LOGGER.info("HELLO FROM COMMON SETUP");
+        LOGGER.info("Injected Curse into Game");
 
-
-
-        Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
     }
 
 

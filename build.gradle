@@ -1,7 +1,7 @@
 plugins {
     id 'java-library'
     id 'maven-publish'
-    id 'net.neoforged.moddev' version '1.0.23'
+    id 'net.neoforged.moddev' version '2.0.59-beta'
     id 'idea'
 }
 
@@ -40,7 +40,7 @@ neoForge {
     }
 
     // This line is optional. Access Transformers are automatically detected
-     //accessTransformers = project.files('src/main/resources/META-INF/atfaccesstransformer.cfg')
+     accessTransformers = project.files('src/main/resources/META-INF/atfaccesstransformer.cfg')
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.

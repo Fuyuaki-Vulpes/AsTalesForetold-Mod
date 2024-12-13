@@ -19,8 +19,9 @@ import static com.fuyuaki.as_tales_foretold.api.AsTalesForetoldMod.MODID;
 @EventBusSubscriber(modid = MODID, bus = EventBusSubscriber.Bus.MOD)
 public class ModDataGen {
 
+
     @SubscribeEvent
-    public static void gatherData(GatherDataEvent event){
+    public static void gatherClientData(GatherDataEvent.Client event){
         DataGenerator generator = event.getGenerator();
         PackOutput packOutput = generator.getPackOutput();
         ExistingFileHelper existingFileHelper = event.getExistingFileHelper();

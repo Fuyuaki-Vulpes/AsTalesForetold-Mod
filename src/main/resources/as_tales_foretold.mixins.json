@@ -3,6 +3,7 @@
   "package": "com.fuyuaki.as_tales_foretold.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
+    "BiomeAmbientSoundsHandlerMixin",
     "LivingEntityMixin"
   ],
   "client": [

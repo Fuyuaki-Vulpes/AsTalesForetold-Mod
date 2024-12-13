@@ -12,8 +12,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.fml.event.config.ModConfigEvent;
 import net.neoforged.neoforge.common.ModConfigSpec;
 
-// An example config class. This is not required, but it's a good idea to have one to keep your config organized.
-// Demonstrates how to use Neo's config APIs
+
 @EventBusSubscriber(modid = AsTalesForetoldMod.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class Config
 {
@@ -24,40 +23,40 @@ public class Config
             .define("logDirtBlock", true);
 
     private static final ModConfigSpec.IntValue PICK_UP_MOB_DROPS = BUILDER
-            .comment("How often should Herobrine pick up mob drops? (One in X)")
-            .defineInRange("pickUpMobDrops", 20, 0, Integer.MAX_VALUE);
+            .comment("How often should Herobrine pick up mob drops? 0 = Disable (One in X)")
+            .defineInRange("pickUpMobDrops", 800, 0, Integer.MAX_VALUE);
 
-    public static final ModConfigSpec.ConfigValue<String> MAGIC_NUMBER_INTRODUCTION = BUILDER
-            .comment("What you want the introduction message to be for the magic number")
-            .define("magicNumberIntroduction", "The magic number is... ");
 
-    // a list of strings that are treated as resource locations for items
-    private static final ModConfigSpec.ConfigValue<List<? extends String>> ITEM_STRINGS = BUILDER
-            .comment("A list of items to log on common setup.")
-            .defineListAllowEmpty("items", List.of("minecraft:iron_ingot"), Config::validateItemName);
+    private static final ModConfigSpec.IntValue BLOCK_INTERACTION_RATE = BUILDER
+            .comment("How often should Herobrine make block noises around you? 0 = Disable (One in X)")
+            .defineInRange("blockInteractionRate", 3000, 0, Integer.MAX_VALUE);
+
+    private static final ModConfigSpec.DoubleValue MIMICRY_RATE = BUILDER
+            .comment("Percentage Chance of making a mimicry. 0 = Disable")
+            .defineInRange("mimicryRate", 0.01, 0, 1.0);
+    private static final ModConfigSpec.IntValue MIMICRY_TIMER = BUILDER
+            .comment("Ticks to wait for another mimicry attempt, 20 ticks = 1 sec")
+            .defineInRange("mimicryTimer", 1226, 0, Integer.MAX_VALUE);
+
 
     static final ModConfigSpec SPEC = BUILDER.build();
 
     public static boolean logDirtBlock;
     public static int pickUpMobDrops;
-    public static String magicNumberIntroduction;
-    public static Set<Item> items;
+    public static int blockInteractionRate;
+    public static double mimicryRate;
+    public static int mimicryTimer;
 
-    private static boolean validateItemName(final Object obj)
-    {
-        return obj instanceof String itemName && BuiltInRegistries.ITEM.containsKey(ResourceLocation.parse(itemName));
-    }
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event)
     {
         logDirtBlock = LOG_DIRT_BLOCK.get();
         pickUpMobDrops = PICK_UP_MOB_DROPS.get();
-        magicNumberIntroduction = MAGIC_NUMBER_INTRODUCTION.get();
+        blockInteractionRate = BLOCK_INTERACTION_RATE.get();
+        mimicryRate = MIMICRY_RATE.get();
+        mimicryTimer = MIMICRY_TIMER.get();
 
-        // convert the list of strings into a set of items
-        items = ITEM_STRINGS.get().stream()
-                .map(itemName -> BuiltInRegistries.ITEM.getValue(ResourceLocation.parse(itemName)))
-                .collect(Collectors.toSet());
+
     }
 }
